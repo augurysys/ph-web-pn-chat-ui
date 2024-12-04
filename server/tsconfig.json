@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "inlineSources": true,
+    "inlineSourceMap": true,
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "lib": ["es2017"],
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
+  "types": ["node"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

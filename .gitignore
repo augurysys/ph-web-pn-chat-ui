@@ -1,0 +1,8 @@
+node_modules
+build
+dist
+.vscode
+.DS_Store
+test-report.xml
+coverage
+.idea

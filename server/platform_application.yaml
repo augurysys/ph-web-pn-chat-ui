@@ -1,0 +1,4 @@
+ENV: local
+REACT_BUNDLE_URL: https://localhost:5100/react-bundle.js
+MF_URLS:
+  CHAT_MF: https://localhost:5100

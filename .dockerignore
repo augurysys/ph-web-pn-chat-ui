@@ -1,0 +1,11 @@
+dist
+k8s
+react_artifacts@tmp
+node_modules
+Jenkinsfile
+Dockerfile
+.git
+.husky
+.gitignore
+.dockerignore
+**/node_modules
