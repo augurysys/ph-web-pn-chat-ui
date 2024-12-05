@@ -1,0 +1,50 @@
+version: 2.1
+
+orbs:
+  ph-circleci-orb: augurysys/ph-circleci-orb@1.2.07
+
+parameters:
+  image:
+    type: string
+    default: 'pnchatui'
+
+workflows:
+  ci_cd:
+    jobs:
+      - ph-circleci-orb/ms-build-push:
+          name: docker_build_push
+          image: << pipeline.parameters.image >>
+          branch: << pipeline.git.branch >>
+          context:
+            - ph-azure
+            - ph-artifacts
+      - ph-circleci-orb/gitops-deployment-and-sync:
+          name: gitops_deployment_qa
+          image: << pipeline.parameters.image >>
+          ms_name: << pipeline.parameters.image >>
+          branch: << pipeline.git.branch >>
+          env: qa1-az
+          requires:
+            - docker_build_push
+          filters:
+            branches:
+              only:
+                - qa1-az
+          context:
+            - github
+            - ph-argocd-web-dev
+#      - ph-circleci-orb/gitops-deployment-and-sync:
+#          name: gitops_deployment_prod
+#          image: << pipeline.parameters.image >>
+#          ms_name: << pipeline.parameters.image >>
+#          branch: << pipeline.git.branch >>
+#          env: 'ph-prod'
+#          requires:
+#            - docker_build_push
+#          filters:
+#            branches:
+#              only:
+#                - master
+#          context:
+#            - github
+#            - ph-argocd-web-prod
