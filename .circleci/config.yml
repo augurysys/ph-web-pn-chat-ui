@@ -11,10 +11,17 @@ parameters:
 workflows:
   ci_cd:
     jobs:
+      - ph-circleci-orb/npm-tests:
+          name: tests
+          tag: '18.17.0'
+          context:
+            - sonarcloud
       - ph-circleci-orb/ms-build-push:
           name: docker_build_push
           image: << pipeline.parameters.image >>
           branch: << pipeline.git.branch >>
+          requires:
+            - tests
           context:
             - ph-azure
             - ph-artifacts
